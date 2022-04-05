@@ -33,6 +33,7 @@ const TestCanvas: React.FC<Props> = ({ data, scale, title }) => {
         data.items.map((item, idx) => {
             darwBody(idx, item as Item);
         });
+        darwFooter();
     }, [context]);
 
     const darwFooter = () => {
@@ -153,7 +154,6 @@ const TestCanvas: React.FC<Props> = ({ data, scale, title }) => {
     };
 
     const download = () => {
-        darwFooter();
         const canvas = canvasRef.current;
         let url = canvas?.toDataURL("image/png");
         let link = document.createElement("a");
