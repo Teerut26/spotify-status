@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import useFetch from "../hook/useFetch";
 import { TopTracks } from "../interfaces/TopTracks";
+import TestCanvas from "./TestCanvas";
 
 const AllTime: React.FC = () => {
     const [sunSec, setsunSec] = useState<number>(0);
@@ -54,7 +55,8 @@ const AllTime: React.FC = () => {
 
     return (
         <div className="max-w-[24rem] mx-auto py-3">
-            <div className="flex flex-col bg-[#2F2F2F] p-2">
+            {resutl ? <TestCanvas scale={10} data={resutl as TopTracks} /> : ""}
+            {/* <div className="flex flex-col bg-[#2F2F2F] p-2">
                 <div className="flex flex-col mb-2">
                     <div className="flex justify-between">
                         <div className="text-[#E78338] font-bold">#</div>
@@ -103,12 +105,8 @@ const AllTime: React.FC = () => {
                         </div>
                     </div>
                 ))}
-            </div>
-            <div className="flex justify-center py-3">
-                <div onClick={() => cap()} className="btn btn-primary">
-                    Download
-                </div>
-            </div>
+            </div> */}
+           
         </div>
     );
 };

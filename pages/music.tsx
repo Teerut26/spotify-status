@@ -5,6 +5,7 @@ import AllTime from "../components/AllTime";
 import LastMonth from "../components/LastMonth";
 import LastSixMonths from "../components/LastSixMonths";
 import Login from "../components/Login";
+import TestCanvas from "../components/TestCanvas";
 import CheckLogin from "../layout/CheckLogin";
 import WithNavbar from "../layout/WithNavbar";
 import { RootState } from "../store/root";
