@@ -110,7 +110,7 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
     };
 
     const limitString = (string: string) => {
-        const limit: number = 30;
+        const limit: number = 33;
         let point = string.length > limit ? "..." : "";
         return string.substring(0, limit) + point;
     };
