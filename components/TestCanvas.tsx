@@ -1,19 +1,25 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Item, TopTracks } from "../interfaces/TopTracks";
+import { RootState } from "../store/root";
 
 interface Props {
     data: TopTracks;
     scale: number;
+    title: string;
 }
 
 // let scale: number = 20;
 let width: number = 384;
-let height: number = 490;
+let height: number = 590;
 
-const TestCanvas: React.FC<Props> = ({ data,scale }) => {
+const TestCanvas: React.FC<Props> = ({ data, scale, title }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [context, setContext] = useState<CanvasRenderingContext2D | null>();
+    const useData = useSelector(
+        (state: RootState) => state.checkTokenSlice.data
+    );
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -30,19 +36,24 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
     }, [context]);
 
     const darwFooter = () => {
+        let y: number = 110;
+        let x: number = 0;
         if (context) {
             context.font = `bold ${10 * scale}px Arial`;
             context.textAlign = `center`;
             context.fillStyle = `#E78338`;
             context.fillText(
                 "Generate By Spotify Status",
-                192 * scale,
-                475 * scale
+                (192 + x) * scale,
+                (465 + y) * scale
             );
         }
     };
 
     const darwHearder = () => {
+        let y: number = 110;
+        let x: number = 0;
+
         if (context) {
             let count_ms: number = 0;
 
@@ -51,23 +62,49 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
             context.fillStyle = "#2F2F2F";
             context.fillRect(0, 0, width * scale, height * scale);
 
+            context.font = `bold ${40 * scale}px Arial`;
+            context.textAlign = `left`;
+            context.fillStyle = `#E78338`;
+            context.fillText(title, (10 + x) * scale, (-65 + y) * scale);
+
+            context.font = `bold ${20 * scale}px Arial`;
+            context.textAlign = `left`;
+            context.fillStyle = `#E78338`;
+            context.fillText(
+                useData.data?.display_name as string,
+                (10 + x) * scale,
+                (-40 + y) * scale
+            );
+
             context.font = `bold ${15 * scale}px Arial`;
             context.textAlign = `left`;
             context.fillStyle = `#E78338`;
-            context.fillText("#", 10 * scale, 25 * scale);
+            context.fillText(
+                moment().format("LLLL"),
+                (10 + x) * scale,
+                (-20 + y) * scale
+            );
+
+            context.font = `bold ${15 * scale}px Arial`;
+            context.textAlign = `left`;
+            context.fillStyle = `#E78338`;
+            context.fillText("#", (10 + x) * scale, (10 + y) * scale);
 
             context.font = `bold ${15 * scale}px Arial`;
             context.textAlign = `right`;
             context.fillStyle = `#E78338`;
             context.fillText(
                 moment.utc(count_ms).format("HH:mm:ss"),
-                375 * scale,
-                25 * scale
+                (375 + x) * scale,
+                (10 + y) * scale
             );
         }
     };
 
     const darwBody = (row: number, dataItem: Item) => {
+        let y: number = 100;
+        let x: number = 0;
+
         if (context) {
             context.font = `bold ${15 * scale}px Arial`;
             context.textAlign = `left`;
@@ -76,8 +113,8 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
                 limitString(
                     `${row + 1}. ${dataItem.name} - ${dataItem.artists[0].name}`
                 ),
-                10 * scale,
-                50 * scale + 42.5 * scale * row
+                (10 + x) * scale,
+                (50 + y) * scale + 42.5 * scale * row
             );
 
             context.font = `bold ${12.5 * scale}px Arial`;
@@ -85,8 +122,8 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
             context.fillStyle = `#858D8D`;
             context.fillText(
                 "MP3 :: 44 kHz, 320 kbps",
-                10 * scale,
-                67.5 * scale + 42.5 * scale * row
+                (10 + x) * scale,
+                (67.5 + y) * scale + 42.5 * scale * row
             );
 
             context.font = `bold ${15 * scale}px Arial`;
@@ -94,8 +131,8 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
             context.fillStyle = `#B5B7B5`;
             context.fillText(
                 moment.utc(dataItem.duration_ms).format("mm:ss"),
-                375 * scale,
-                50 * scale + 42.5 * scale * row
+                (375 + x) * scale,
+                (50 + y) * scale + 42.5 * scale * row
             );
 
             context.font = `bold ${12.5 * scale}px Arial`;
@@ -103,8 +140,8 @@ const TestCanvas: React.FC<Props> = ({ data,scale }) => {
             context.fillStyle = `#858D8D`;
             context.fillText(
                 "⭐⭐⭐⭐⭐",
-                375 * scale,
-                67.5 * scale + 42.5 * scale * row
+                (375 + x) * scale,
+                (67.5 + y) * scale + 42.5 * scale * row
             );
         }
     };

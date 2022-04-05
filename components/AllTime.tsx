@@ -55,7 +55,7 @@ const AllTime: React.FC = () => {
 
     return (
         <div className="max-w-[24rem] mx-auto py-3">
-            {resutl ? <TestCanvas scale={10} data={resutl as TopTracks} /> : ""}
+            {resutl ? <TestCanvas title="ALL TIME" scale={10} data={resutl as TopTracks} /> : ""}
             {/* <div className="flex flex-col bg-[#2F2F2F] p-2">
                 <div className="flex flex-col mb-2">
                     <div className="flex justify-between">
