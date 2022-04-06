@@ -27,7 +27,7 @@ const Navbar: React.FC<Props> = () => {
                             <div className="container">
                                 <div className="navbar-brand">
                                     <i className="fa-brands fa-spotify"></i>{" "}
-                                    Spotify Status
+                                    Holify
                                 </div>
                                 <button
                                     className="navbar-toggler"
