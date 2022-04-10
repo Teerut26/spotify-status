@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "spotify";
+    src: url("../asset/spotify.woff2");
+    src: url("../asset/spotify-blod.woff2");
+}
+
+@font-face {
+    font-family: "SFThonburi";
+    src: url("../asset/SFThonburi-Bold.ttf");
+    src: url("../asset/SFThonburi-Regular.ttf");
+    src: url("../asset/SFThonburi-Semibold.ttf");
+}
+
+* {
+    font-family: SFThonburi, sans-serif;
+}

@@ -1,15 +1,36 @@
-import { faHome, faMusic } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import useCheckToken from "../hook/useCheckToken";
+import React from "react";
+import { useSelector } from "react-redux";
 import useRefreshToken from "../hook/useRefreshToken";
 import useSignOut from "../hook/useSignOut";
 import { RootState } from "../store/root";
-import { checkTokenActions } from "../store/slice/checkTokenSlice";
 import Navlink from "./Navlink";
 
 interface Props {}
+
+interface MusicList {
+    title: string;
+    href: string;
+    icon?: JSX.Element;
+}
+
+const music_list: MusicList[] = [
+    {
+        title: "Last Month",
+        href: "/music/last-month",
+    },
+    {
+        title: "Last 6 Month",
+        href: "/music/last-6-month",
+    },
+    {
+        title: "All Time",
+        href: "/music/all-time",
+    },
+    {
+        title: "Recently Played",
+        href: "/music/recently-played",
+    },
+];
 
 const Navbar: React.FC<Props> = () => {
     const isLive = useSelector(
@@ -54,14 +75,33 @@ const Navbar: React.FC<Props> = () => {
                                                 Home
                                             </Navlink>
                                         </li>
-                                        <li className="nav-item">
-                                            <Navlink
-                                                className="nav-link"
-                                                href="/music"
+                                        <li className="nav-item dropdown">
+                                            <a
+                                                className="nav-link dropdown-toggle"
+                                                href="#"
+                                                id="navbarDropdown"
+                                                role="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
                                             >
                                                 <i className="fa-solid fa-music"></i>{" "}
                                                 Music
-                                            </Navlink>
+                                            </a>
+                                            <ul
+                                                className="dropdown-menu"
+                                                aria-labelledby="navbarDropdown"
+                                            >
+                                                {music_list.map((item, idx) => (
+                                                    <li key={idx}>
+                                                        <Navlink
+                                                            className="dropdown-item"
+                                                            href={item.href}
+                                                        >
+                                                            {item.icon}{" "}{item.title}
+                                                        </Navlink>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </li>
                                     </ul>
                                     <div className="flex flex-col md:flex-row gap-2">
